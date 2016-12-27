@@ -286,29 +286,25 @@ public class JIRAAccessTool {
 	 * 		a String containing the html code
 	 */
 	public String buildReleaseNotesHTML(List<Issue> issuesToShow) {
-		
-		Set<String> issueTypesSet = new HashSet<String>();
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<table>");
+		sb.append("<tr>");
+		sb.append("<td><b>Key</b></td>");
+		sb.append("<td><b>Summary</b></td>");
+		sb.append("<td><b>Reporter</b></td>");
+		sb.append("</tr>");
+
 		for (Issue is : issuesToShow) {
-			issueTypesSet.add(is.getIssueType().getName());
+			is.getReporter().getDisplayName();
+			sb.append("<tr>");
+			sb.append("<td><a href='" + url + "/browse/" + is.getKey() + "'>" + is.getKey() + "</a></td>");
+			sb.append("<td>" + is.getSummary() + "</td>");
+			sb.append("<td>" + is.getReporter().getDisplayName() + "</td>");
+			sb.append("</tr>");
 		}
-		ArrayList<String> sortedIssueTypes = new ArrayList<String>(issueTypesSet);
-		sortedIssueTypes.sort(String.CASE_INSENSITIVE_ORDER);
-		
-		String resultHtml = "";
-		//build a header and list for each issue type
-		for (String issueType : sortedIssueTypes) {
-			resultHtml += "<h2>" + issueType + "</h2>";
-			resultHtml += "<ul>";
-			for (Issue is : issuesToShow) {
-				if (is.getIssueType().getName().equals(issueType)) {
-					
-					resultHtml += "<li>[<a href='" + url + "/browse/" + is.getKey() + "'>" + is.getKey() + "</a>] - " + is.getSummary() + "</li>";
-				}
-			}
-			resultHtml += "</ul>";
-		}
-		
-		return resultHtml;
+		sb.append("</table>");
+		return sb.toString();
 	}
 	
 	/**
