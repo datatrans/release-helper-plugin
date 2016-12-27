@@ -304,6 +304,21 @@ public class JIRAAccessTool {
 			sb.append("</tr>");
 		}
 		sb.append("</table>");
+
+		// Footer
+		sb.append("<table>");
+
+		sb.append("<tr>");
+		sb.append("<td class=\"highlight-yellow\" data-highlight-colour=\"yellow\">&nbsp;</td>");
+		sb.append("<td>Cases relevant for sales and/or support are marked yellow.</td>");
+		sb.append("</tr>");
+
+		sb.append("<tr>");
+		sb.append("<td class=\"highlight-red\" data-highlight-colour=\"red\">&nbsp;</td>");
+		sb.append("<td>Cases in red could be relevant for merchants and might be included in the newsletter.</td>");
+		sb.append("</tr>");
+
+		sb.append("</table>");
 		return sb.toString();
 	}
 	
