@@ -108,7 +108,7 @@ public class ConfluenceReleaseNotesPublisher extends AbstractJIRAConfluenceActio
 		
 		logger.println("Publishing " + tickets.size() + " tickets on page '" + pageTitle + "' in space '" + spaceKey + "' on confluence.");
 		
-		String pageHTML = jira.buildReleaseNotesHTML(tickets);
+		String pageHTML = wrapIntoExcerpt(jira.buildReleaseNotesHTML(tickets));
 		
 		Long parentPageID = null;
 		if (!parentPageTitle.isEmpty()) {
@@ -132,9 +132,19 @@ public class ConfluenceReleaseNotesPublisher extends AbstractJIRAConfluenceActio
 		return true;
 	}
 
+	private String wrapIntoExcerpt(String htmlContent) {
+		StringBuilder sb = new StringBuilder();
 
+		// wrap into a excerpt macro
+		sb.append("<ac:structured-macro ac:name=\"excerpt\">" +
+				"    <ac:parameter ac:name=\"atlassian-macro-output-type\">INLINE</ac:parameter>" +
+				"    <ac:rich-text-body>");
 
+		sb.append(htmlContent);
+		sb.append("</ac:rich-text-body></ac:structured-macro>");
 
+		return sb.toString();
+	}
 
 	/**
 	 * Descriptor class.

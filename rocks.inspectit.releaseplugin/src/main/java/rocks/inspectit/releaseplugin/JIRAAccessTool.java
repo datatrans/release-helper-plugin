@@ -287,12 +287,6 @@ public class JIRAAccessTool {
 	 */
 	public String buildReleaseNotesHTML(List<Issue> issuesToShow) {
 		StringBuilder sb = new StringBuilder();
-
-		// wrap into a excerpt macro
-		sb.append("<ac:structured-macro ac:name=\"excerpt\">" +
-				"    <ac:parameter ac:name=\"atlassian-macro-output-type\">INLINE</ac:parameter>" +
-				"    <ac:rich-text-body>");
-
 		sb.append("<table>");
 		sb.append("<tr>");
 		sb.append("<td><b>Key</b></td>");
@@ -309,23 +303,6 @@ public class JIRAAccessTool {
 			sb.append("</tr>");
 		}
 		sb.append("</table>");
-
-		sb.append("</ac:rich-text-body></ac:structured-macro>");
-
-		// Footer
-//		sb.append("<table>");
-//
-//		sb.append("<tr>");
-//		sb.append("<td class='highlight-yellow' data-highlight-colour='yellow'> </td>");
-//		sb.append("<td>Cases relevant for sales and support are marked yellow.</td>");
-//		sb.append("</tr>");
-//
-//		sb.append("<tr>");
-//		sb.append("<td class='highlight-red' data-highlight-colour='red'> </td>");
-//		sb.append("<td>Cases in red could be relevant for merchants and might be included in the newsletter.</td>");
-//		sb.append("</tr>");
-//
-//		sb.append("</table></div>");
 		return sb.toString();
 	}
 	
