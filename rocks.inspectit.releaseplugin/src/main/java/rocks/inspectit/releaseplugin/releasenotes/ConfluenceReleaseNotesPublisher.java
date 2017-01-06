@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 
+import com.google.gson.Gson;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.text.StrSubstitutor;
 import org.kohsuke.stapler.DataBoundConstructor;
 
@@ -109,7 +111,7 @@ public class ConfluenceReleaseNotesPublisher extends AbstractJIRAConfluenceActio
 		logger.println("Publishing " + tickets.size() + " tickets on page '" + pageTitle + "' in space '" + spaceKey + "' on confluence.");
 		
 		String pageHTML = wrapIntoExcerpt(jira.buildReleaseNotesHTML(tickets));
-		
+
 		Long parentPageID = null;
 		if (!parentPageTitle.isEmpty()) {
 			List<Long> results = confluence.getPageIDByTitle(parentPageTitle, spaceKey);		
@@ -121,10 +123,8 @@ public class ConfluenceReleaseNotesPublisher extends AbstractJIRAConfluenceActio
 			}
 			parentPageID = results.get(0);
 		}
-		
-		
+
 		confluence.createPage(pageTitle, pageHTML, spaceKey, parentPageID);
-			
 
 		confluence.destroy();
 		jira.destroy();

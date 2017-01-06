@@ -1,5 +1,6 @@
 package rocks.inspectit.releaseplugin;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.atlassian.jira.rest.client.api.domain.input.IssueInputBuilder;
 import com.atlassian.jira.rest.client.api.domain.input.TransitionInput;
 import com.atlassian.jira.rest.client.api.domain.input.VersionInputBuilder;
 import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 
 /**
@@ -295,10 +297,9 @@ public class JIRAAccessTool {
 		sb.append("</tr>");
 
 		for (Issue is : issuesToShow) {
-			is.getReporter().getDisplayName();
 			sb.append("<tr>");
 			sb.append("<td><a href='" + url + "/browse/" + is.getKey() + "'>" + is.getKey() + "</a></td>");
-			sb.append("<td>" + is.getSummary() + "</td>");
+			sb.append("<td>" + StringEscapeUtils.escapeHtml4(is.getSummary()) + "</td>");
 			sb.append("<td>" + is.getReporter().getDisplayName() + "</td>");
 			sb.append("</tr>");
 		}

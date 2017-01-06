@@ -8,6 +8,7 @@ import java.util.Map;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * Type encapsulating the REST-API based access to a confluence Server. Allows
@@ -124,7 +125,6 @@ public class ConfluenceAccessTool {
 		page.add("body", body);
 		
 		client.postJson("/rest/api/content", page);
-			
 
 	}
 
