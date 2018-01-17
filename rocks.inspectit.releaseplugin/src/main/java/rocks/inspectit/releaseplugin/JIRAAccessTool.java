@@ -300,7 +300,7 @@ public class JIRAAccessTool {
 			sb.append("<tr>");
 			sb.append("<td><a href='" + url + "/browse/" + is.getKey() + "'>" + is.getKey() + "</a></td>");
 			sb.append("<td>" + StringEscapeUtils.escapeHtml4(is.getSummary()) + "</td>");
-			sb.append("<td>" + is.getReporter().getDisplayName() + "</td>");
+			sb.append("<td>" + StringEscapeUtils.escapeHtml4(is.getReporter().getDisplayName()) + "</td>");
 			sb.append("</tr>");
 		}
 		sb.append("</table>");
